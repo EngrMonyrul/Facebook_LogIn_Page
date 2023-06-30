@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sharebutton/providers/screenMode.dart';
-import 'package:sharebutton/screens/homeScreen.dart';
-import 'package:sharebutton/screens/splashScreen.dart';
-import 'components/routes.dart';
+import 'package:sharebutton/another_section/provider/favItemProvider.dart';
+import 'package:sharebutton/another_section/screens/mainScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,18 +15,23 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'facebook',
-      // initialRoute: '/',
-      // routes: routes(),
-      theme: ThemeData(
-        fontFamily: 'facebook'
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=> FavItem()),
+      ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'facebook',
+        // initialRoute: '/',
+        // routes: routes(),
+        theme: ThemeData(
+          fontFamily: 'Times New Roman'
+        ),
+        home: const MainScreen(),
       ),
-      home: const SplashScreen(),
     );
   }
 }
